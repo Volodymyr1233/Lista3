@@ -40,10 +40,9 @@ def getEntriesByAddr(tuples:[str], addr:str):
     elif __isValidIp(addr) or __isValidDomain(addr):
         result = []
         for tup in tuples:
-            for value in tup:
-                if value == addr:
-                    result.append(value)
-                    break
+            if tup[2]==addr or tup[4]==addr:
+                    result.append(tup)
+        return result
     else:
         raise InvalidIp(addr)
 
