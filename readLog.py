@@ -1,8 +1,9 @@
-import sys
-import io
+import tool
 from datetime import datetime
 
 __format = '%d-%m-%Y'
+
+
 def read(input:str):
         file = input.split('\n')
         lst  = []
@@ -25,13 +26,9 @@ def read(input:str):
 
 
 
+
 if __name__ == "__main__":
-    sys.stdin = io.TextIOWrapper(sys.stdin.buffer, encoding='utf-8')
-    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
-    input = sys.stdin.read()
-    a = read(input)
+    a = read(tool.readInput())
     for item in a:
-        for j in item:
-            print(j.__class__.__name__,end='\t')
-        print()
+        print(len(item))
 
