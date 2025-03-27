@@ -4,9 +4,6 @@ import readLog
 import log_to_dict
 from datetime import datetime
 
-from test import attributes
-
-
 def __get_str_from_user(logs:[dict])->str:
     result = ''
     for i,log in enumerate(logs):
@@ -25,9 +22,9 @@ def __get_first_last_date(logs:[dict])->(datetime.date,datetime.date):
         max_log = logs[0][time_name]
         for i in range(1,len(logs)):
             if logs[i][time_name] < min_log:
-                min_log = logs[i]
+                min_log = logs[i][time_name]
             if logs[i][time_name] > max_log:
-                max_log = logs[i]
+                max_log = logs[i][time_name]
         return min_log,max_log
 
 def __get__percentage(logs:[dict])->str:
@@ -52,6 +49,24 @@ def __get__percentage(logs:[dict])->str:
         result += f'{key}:{methods_counter_dict[key] / all_methods_count * 100}%, '
     return result
 
+def __2xx_requests(logs:[dict])->float:
+    #? nie wiem ktore to numer ma byc
+    if len(logs)==0:
+        return 0
+    counter = 0
+    request_name = tool.getIpAtributes()[14]
+    for log in logs:
+        if not request_name in log:
+            raise ValueError(f"{request_name} not in log dictionary")
+        if not isinstance (log[request_name], float):
+            return 0.0
+        if 300>log[request_name]>=200:
+            counter += 1
+    return counter/len(logs)
+
+
+
+
 
 def str_dict_entry_dates(log_dict:dict[str,[dict]])->str:
     if not isinstance(log_dict, dict):
@@ -60,14 +75,15 @@ def str_dict_entry_dates(log_dict:dict[str,[dict]])->str:
         return 'empty'
     else:
         result = ''
-        for uid,logs in log_dict.items():
-            result += f'UserId: {uid}\n'
+        for i_user,(uid,logs) in enumerate(log_dict.items()):
+            result += f'{i_user}: UserId: {uid}\n'
             result += f'\tNumber of requests: {len(logs)}\n'
             (first,last) = __get_first_last_date(logs)
             if first is not None and last is not None:
                 result += f'\tFirst date: {first}\n'
                 result += f'\tLast date: {last}\n'
-            result += f'\t{__get__percentage(logs)}'
+            result += f'\t{__get__percentage(logs)}\n'
+            result += f'\tStatus code 2xx: {__2xx_requests(logs)}\n'
             result +=('\n'+(__get_str_from_user(logs)))
         return result
 
@@ -76,4 +92,4 @@ if __name__ == '__main__':
     try:
         tool.writeOutput(str_dict_entry_dates(log_to_dict.log_to_dict(tuples)))
     except ValueError as e:
-        tool.writeOutput(e)
+        tool.writeOutput(e.__str__())
