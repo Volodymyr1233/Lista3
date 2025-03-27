@@ -1,7 +1,7 @@
 import tool
 from datetime import datetime
 
-__format = '%d-%m-%Y'
+
 
 
 def read(input:str):
@@ -12,13 +12,15 @@ def read(input:str):
                 continue
             temp= line.split('\t')
             micro_lst = []
-            for item in temp:
+            try:
+                micro_lst.append(datetime.fromtimestamp(float(temp[0])))
+            except ValueError:
+                continue
+            for i in range(1,len(temp)):
+                item = temp[i]
                 if item.isnumeric():
                     micro_lst.append(float(item))
                 else:
-                    try:
-                        micro_lst.append(datetime.strptime(item,__format))
-                    except ValueError:
                         micro_lst.append(item)
             lst.append(tuple(micro_lst))
         return lst
