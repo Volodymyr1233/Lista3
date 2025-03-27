@@ -1,5 +1,4 @@
-import sys
-import io
+import tool
 from datetime import datetime
 
 __format = '%d-%m-%Y'
@@ -26,12 +25,10 @@ def read(input:str):
 
 
 
-def readInput():
-    sys.stdin = io.TextIOWrapper(sys.stdin.buffer, encoding='utf-8')
-    return sys.stdin.read()
+
 
 if __name__ == "__main__":
-    a = read(readInput())
+    a = read(tool.readInput())
     for item in a:
         print(len(item))
 
