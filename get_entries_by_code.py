@@ -1,5 +1,7 @@
 from print_pretty_logs import print_pretty_logs
 
+
+
 def get_entries_by_code(log, status_code):
     if (__validate_status_code(status_code)):
         result_logs = []
