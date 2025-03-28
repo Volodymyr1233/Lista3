@@ -1,6 +1,7 @@
 import sys
 import io
 from datetime import datetime
+from sort_function import sort_log
 
 __format = '%d-%m-%Y'
 def read(input:str):
@@ -30,8 +31,10 @@ if __name__ == "__main__":
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
     input = sys.stdin.read()
     a = read(input)
-    for item in a:
-        for j in item:
-            print(j.__class__.__name__,end='\t')
-        print()
+    print(sort_log(a, 3))
+
+    # for item in a:
+    #     for j in item:
+    #         print(j.__class__.__name__,end='\t')
+    #     print()
 
