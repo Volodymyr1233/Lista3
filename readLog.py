@@ -1,5 +1,6 @@
 import tool
 from datetime import datetime
+from get_entries_by_extension import get_entries_by_extension
 
 
 
@@ -31,6 +32,6 @@ def read(input:str):
 
 if __name__ == "__main__":
     a = read(tool.readInput())
-    for item in a:
-        print(len(item))
+    get_entries_by_extension(a, "jpg")
+
 

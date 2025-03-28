@@ -1,5 +1,3 @@
-
-
 def get_failed_reads(tuples:[tuple],linked:bool=False)->[tuple]:
     if len(tuples)==0:
         return []
