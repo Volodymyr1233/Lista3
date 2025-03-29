@@ -68,7 +68,7 @@ def __2xx_requests(logs:[dict])->float:
 
 
 
-def str_dict_entry_dates(log_dict:dict[str,[dict]])->str:
+def str_dict_entry_dates(log_dict:dict[str,[dict]],first_user_index=0)->str:
     if not isinstance(log_dict, dict):
         raise ValueError("log_dict must be a dictionary")
     elif len(log_dict) == 0:
@@ -76,7 +76,7 @@ def str_dict_entry_dates(log_dict:dict[str,[dict]])->str:
     else:
         result = ''
         for i_user,(uid,logs) in enumerate(log_dict.items()):
-            result += f'{i_user}: UserId: {uid}\n'
+            result += f'{i_user+first_user_index}: UserId: {uid}\n'
             result += f'\tNumber of requests: {len(logs)}\n'
             (first,last) = __get_first_last_date(logs)
             if first is not None and last is not None:
