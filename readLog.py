@@ -1,7 +1,5 @@
 import tool
 from datetime import datetime
-from get_entries_by_extension import get_entries_by_extension
-
 
 
 
@@ -32,6 +30,7 @@ def read(input:str):
 
 if __name__ == "__main__":
     a = read(tool.readInput())
-    get_entries_by_extension(a, "jpg")
+    for log in a:
+        print(log)
 
 

@@ -1,4 +1,5 @@
 def get_failed_reads(tuples:[tuple],linked:bool=False)->[tuple]:
+    """:return (4XX,5XX)"""
     if len(tuples)==0:
         return []
     result4 = []
@@ -9,4 +10,4 @@ def get_failed_reads(tuples:[tuple],linked:bool=False)->[tuple]:
                 result4.append(item)
             elif 600>item[14]>=500:
                 result5.append(item)
-    return (result4+result5) if linked else result4,result5
+    return result4+result5 if linked else (result4,result5)

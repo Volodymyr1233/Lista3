@@ -23,7 +23,11 @@ def __isValidDomain(domain:str):
         return False
     if len(domain_parts[1])==0:
         return False
-    if not len(domain_parts[1].strip('.'))==2:
+    if not len(domain_parts[1].split('.'))==2:
+        return False
+    if len(domain_parts[0][1])==0:
+        return False
+    if len(domain_parts[1][0])==0:
         return False
     return True
 

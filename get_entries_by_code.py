@@ -8,8 +8,7 @@ def get_entries_by_code(log, status_code):
         for item in log:
             if (item[14] == status_code):
                 result_logs.append(item)
-        print_pretty_logs(result_logs)
-        print(len(result_logs))
+        return result_logs
     else:
         raise TypeError("Your status code is incorrect")
 

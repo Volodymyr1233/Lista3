@@ -1,4 +1,4 @@
-
+import get_failed_reads
 import tool
 attributes = tool.getIpAtributes()
 
@@ -24,15 +24,13 @@ def print_test(tuples:[tuple]):
                print(f'{i}: invalid length {len(item)}')
        print('------------------------------')
 
+def print_dicts(d:dict):
+    for key, value in d.items():
+        print(f'{key}: {value}')
 
 import readLog
-import get_failed_reads
-import entry_to_dict
-import log_to_dict
-import print_dict_entry_dates
-tuples = readLog.read(readFile("test.txt",30))
+import print_pretty_logs
 
-log_dict = log_to_dict.log_to_dict(tuples)
-for key,item in log_dict.items():
-    print(key,item)
+tuples = readLog.read(readFile('test.txt'))
+print_pretty_logs.print_pretty_logs(tuples)
 
